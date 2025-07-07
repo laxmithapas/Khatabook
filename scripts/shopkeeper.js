@@ -16,7 +16,7 @@ const Shopkeeper = {
             const isOverdue = baaki.status === 'overdue' || 
                              (new Date(baaki.dueDate) < new Date() && baaki.status !== 'paid');
             const baakiCard = document.createElement('div');
-            baakiCard.className = baaki-card ${isOverdue ? 'overdue' : ''};
+            baakiCard.className = `baaki-card${isOverdue ? ' overdue' : ''}`;
             
             baakiCard.innerHTML = `
                 <h3>${baaki.name} (${baaki.phone})</h3>
@@ -61,12 +61,12 @@ const Shopkeeper = {
         this.renderBaaki();
         updateSummary();
         
-        alert(Baaki of ₹${amount} added for ${name});
+        alert(`Baaki of ₹${amount} added for ${name}`);
     },
     
     sendReminder: function(id) {
         const baaki = window.shopkeeperBaaki.find(b => b.id === id);
-        alert(Reminder sent to ${baaki.name} (${baaki.phone}):\n\n"Namaste, aapki baaki ₹${baaki.amount} hai. Kripya jama kar dein. Dhanyavaad!");
+        alert(`Reminder sent to ${baaki.name} (${baaki.phone}):\n\n"Namaste, aapki baaki ₹${baaki.amount} hai. Kripya jama kar dein. Dhanyavaad!"`);
     },
     
     markAsPaid: function(id) {
@@ -74,7 +74,7 @@ const Shopkeeper = {
         baaki.status = 'paid';
         this.renderBaaki();
         updateSummary();
-        alert(Marked as paid: ${baaki.name}'s baaki of ₹${baaki.amount});
+        alert(`Marked as paid: ${baaki.name}'s baaki of ₹${baaki.amount}`);
     },
     
     updateSummary: function() {
@@ -84,7 +84,7 @@ const Shopkeeper = {
             baaki.status === 'overdue' || (new Date(baaki.dueDate) < new Date() && baaki.status !== 'paid')
         ).length;
         
-        document.getElementById('total-baaki').textContent = ₹${totalBaaki};
+        document.getElementById('total-baaki').textContent = `₹${totalBaaki}`;
         document.getElementById('pending-count').textContent = pendingCount;
         document.getElementById('overdue-count').textContent = overdueCount;
     }
