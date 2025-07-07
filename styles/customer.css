@@ -1,0 +1,22 @@
+/* Customer-specific styles */
+#customer .baaki-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-left: 4px solid var(--secondary);
+}
+
+#customer .baaki-card.overdue {
+    border-left-color: #f44336;
+}
+
+#customer .baaki-card h3 {
+    margin: 0 0 5px 0;
+    color: var(--secondary);
+}
+
+#customer .baaki-card.overdue h3 {
+    color: #f44336;
+}
