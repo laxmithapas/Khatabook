@@ -4,46 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baaki Settle - Credit Manager</title>
-    <style>
-        :root {
-            --primary: #4CAF50;
-            --secondary: #FF9800;
-            --light: #f5f5f5;
-            --dark: #333;
-        }
-        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { margin: 0; padding: 0; background: #f9f9f9; color: var(--dark); }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        header { background: var(--primary); color: #fff; padding: 15px 0; text-align: center; border-radius: 0 0 10px 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
-        h1 { margin: 0; font-size: 1.8rem; }
-        .tagline { font-style: italic; margin-top: 5px; font-size: 0.9rem; }
-        .tab-container { display: flex; margin: 20px 0; border-bottom: 1px solid #ddd; }
-        .tab { padding: 10px 20px; cursor: pointer; background: #eee; margin-right: 5px; border-radius: 5px 5px 0 0; }
-        .tab.active { background: var(--primary); color: #fff; }
-        .tab-content { display: none; padding: 20px; background: #fff; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
-        .tab-content.active { display: block; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-        button { background: var(--primary); color: #fff; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 16px; }
-        button.secondary { background: var(--secondary); }
-        .baaki-list { margin-top: 20px; }
-        .baaki-card { background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 4px solid var(--primary);}
-        .baaki-card.overdue { border-left-color: #f44336; }
-        .baaki-card h3 { margin: 0 0 5px 0; color: var(--primary);}
-        .baaki-card.overdue h3 { color: #f44336; }
-        .baaki-meta { display: flex; justify-content: space-between; color: #666; font-size: 0.9rem; margin-bottom: 10px;}
-        .baaki-actions { display: flex; gap: 10px; }
-        .summary-cards { display: flex; gap: 15px; margin-bottom: 20px; }
-        .summary-card { flex: 1; background: #fff; padding: 15px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); text-align: center;}
-        .summary-card h3 { margin: 0; font-size: 1.5rem; color: var(--primary);}
-        .summary-card p { margin: 5px 0 0 0; color: #666;}
-        @media (max-width: 600px) {
-            .summary-cards { flex-direction: column; }
-            .baaki-actions { flex-direction: column; }
-            .baaki-actions button { width: 100%; }
-        }
-    </style>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/shopkeeper.css">
+    <link rel="stylesheet" href="styles/customer.css">
 </head>
 <body>
     <header>
@@ -52,27 +15,30 @@
             <p class="tagline">Baaki bhi, vyapar bhi — dono khush</p>
         </div>
     </header>
+    
     <div class="container">
         <div class="tab-container">
-            <div class="tab active" data-tab="shopkeeper">Shopkeeper</div>
-            <div class="tab" data-tab="customer">Customer</div>
+            <div class="tab active" onclick="openTab('shopkeeper')">Shopkeeper</div>
+            <div class="tab" onclick="openTab('customer')">Customer</div>
         </div>
+        
         <!-- Shopkeeper Tab -->
         <div id="shopkeeper" class="tab-content active">
             <div class="summary-cards">
                 <div class="summary-card">
-                    <h3 id="total-baaki">₹2,450</h3>
+                    <h3 id="total-baaki">₹0</h3>
                     <p>Total Baaki</p>
                 </div>
                 <div class="summary-card">
-                    <h3 id="pending-count">7</h3>
+                    <h3 id="pending-count">0</h3>
                     <p>Pending</p>
                 </div>
                 <div class="summary-card">
-                    <h3 id="overdue-count">2</h3>
+                    <h3 id="overdue-count">0</h3>
                     <p>Overdue</p>
                 </div>
             </div>
+            
             <h2>Add New Baaki</h2>
             <form id="add-baaki-form">
                 <div class="form-group">
@@ -97,189 +63,42 @@
                 </div>
                 <button type="submit">Add Baaki</button>
             </form>
+            
             <h2>Pending Baaki</h2>
-            <div class="baaki-list" id="shopkeeper-baaki-list"></div>
+            <div class="baaki-list" id="shopkeeper-baaki-list">
+                <!-- Dynamic content -->
+            </div>
         </div>
+        
         <!-- Customer Tab -->
         <div id="customer" class="tab-content">
             <div class="summary-cards">
                 <div class="summary-card">
-                    <h3 id="customer-total-baaki">₹1,250</h3>
+                    <h3 id="customer-total-baaki">₹0</h3>
                     <p>You Owe</p>
                 </div>
                 <div class="summary-card">
-                    <h3 id="customer-pending-count">3</h3>
+                    <h3 id="customer-pending-count">0</h3>
                     <p>Shops</p>
                 </div>
                 <div class="summary-card">
-                    <h3 id="customer-overdue-count">1</h3>
+                    <h3 id="customer-overdue-count">0</h3>
                     <p>Overdue</p>
                 </div>
             </div>
+            
             <h2>Your Baaki</h2>
-            <div class="baaki-list" id="customer-baaki-list"></div>
+            <div class="baaki-list" id="customer-baaki-list">
+                <!-- Dynamic content -->
+            </div>
         </div>
     </div>
-    <script>
-        const shopkeeperBaaki = [
-            { id: 1, name: "Rajesh Kumar", phone: "9876543210", item: "Groceries", amount: 500, date: "2023-06-01", dueDate: "2023-06-15", status: "pending" },
-            { id: 2, name: "Priya Sharma", phone: "8765432109", item: "Stationery", amount: 250, date: "2023-06-05", dueDate: "2023-06-20", status: "pending" },
-            { id: 3, name: "Amit Patel", phone: "7654321098", item: "Mobile Recharge", amount: 200, date: "2023-05-28", dueDate: "2023-06-10", status: "overdue" },
-            { id: 4, name: "Neha Gupta", phone: "6543210987", item: "Medicines", amount: 1500, date: "2023-06-10", dueDate: "2023-06-30", status: "pending" }
-        ];
-        const customerBaaki = [
-            { id: 1, shop: "Sharma Kirana", phone: "9876543210", item: "Groceries", amount: 500, date: "2023-06-01", dueDate: "2023-06-15", status: "pending" },
-            { id: 2, shop: "Patel Stationers", phone: "8765432109", item: "Notebooks", amount: 250, date: "2023-06-05", dueDate: "2023-06-20", status: "pending" },
-            { id: 3, shop: "Gupta Medical", phone: "7654321098", item: "Medicines", amount: 500, date: "2023-05-28", dueDate: "2023-06-10", status: "overdue" }
-        ];
-        const shopkeeperBaakiList = document.getElementById('shopkeeper-baaki-list');
-        const customerBaakiList = document.getElementById('customer-baaki-list');
-        const addBaakiForm = document.getElementById('add-baaki-form');
 
-        function init() {
-            renderShopkeeperBaaki();
-            renderCustomerBaaki();
-            updateSummary();
-            addBaakiForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                addNewBaaki();
-            });
-            // Tab switching
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.onclick = function() {
-                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-                    this.classList.add('active');
-                    document.getElementById(this.dataset.tab).classList.add('active');
-                };
-            });
-        }
-
-        function baakiCardHtml({title, phone, item, dueDate, amount, date, isOverdue, actions}) {
-            return `<div class="baaki-card${isOverdue ? ' overdue' : ''}">
-                <h3>${title} (${phone})</h3>
-                <div class="baaki-meta">
-                    <span>${item}</span>
-                    <span>Due: ${formatDate(dueDate)}</span>
-                </div>
-                <div class="baaki-meta">
-                    <strong>Amount: ₹${amount}</strong>
-                    <span>Added: ${formatDate(date)}</span>
-                </div>
-                <div class="baaki-actions">${actions}</div>
-            </div>`;
-        }
-
-        function renderShopkeeperBaaki() {
-            shopkeeperBaakiList.innerHTML = shopkeeperBaaki.length === 0
-                ? '<p>No pending baaki records found.</p>'
-                : shopkeeperBaaki.map(baaki => {
-                    const isOverdue = baaki.status === 'overdue' || (new Date(baaki.dueDate) < new Date() && baaki.status !== 'paid');
-                    return baakiCardHtml({
-                        title: baaki.name,
-                        phone: baaki.phone,
-                        item: baaki.item,
-                        dueDate: baaki.dueDate,
-                        amount: baaki.amount,
-                        date: baaki.date,
-                        isOverdue,
-                        actions: `
-                            <button onclick="sendReminder(${baaki.id})">Send Reminder</button>
-                            <button class="secondary" onclick="markAsPaid(${baaki.id})">Mark as Paid</button>
-                        `
-                    });
-                }).join('');
-        }
-
-        function renderCustomerBaaki() {
-            customerBaakiList.innerHTML = customerBaaki.length === 0
-                ? '<p>No baaki records found.</p>'
-                : customerBaaki.map(baaki => {
-                    const isOverdue = baaki.status === 'overdue' || (new Date(baaki.dueDate) < new Date() && baaki.status !== 'paid');
-                    return baakiCardHtml({
-                        title: baaki.shop,
-                        phone: baaki.phone,
-                        item: baaki.item,
-                        dueDate: baaki.dueDate,
-                        amount: baaki.amount,
-                        date: baaki.date,
-                        isOverdue,
-                        actions: `
-                            <button onclick="payBaaki(${baaki.id})">Pay Now</button>
-                            <button class="secondary" onclick="requestExtension(${baaki.id})">Request Extension</button>
-                        `
-                    });
-                }).join('');
-        }
-
-        function updateSummary() {
-            // Shopkeeper summary
-            const totalBaaki = shopkeeperBaaki.reduce((sum, baaki) => sum + baaki.amount, 0);
-            const pendingCount = shopkeeperBaaki.length;
-            const overdueCount = shopkeeperBaaki.filter(baaki =>
-                baaki.status === 'overdue' || (new Date(baaki.dueDate) < new Date() && baaki.status !== 'paid')
-            ).length;
-            document.getElementById('total-baaki').textContent = `₹${totalBaaki}`;
-            document.getElementById('pending-count').textContent = pendingCount;
-            document.getElementById('overdue-count').textContent = overdueCount;
-            // Customer summary
-            const customerTotalBaaki = customerBaaki.reduce((sum, baaki) => sum + baaki.amount, 0);
-            const customerPendingCount = customerBaaki.length;
-            const customerOverdueCount = customerBaaki.filter(baaki =>
-                baaki.status === 'overdue' || (new Date(baaki.dueDate) < new Date() && baaki.status !== 'paid')
-            ).length;
-            document.getElementById('customer-total-baaki').textContent = `₹${customerTotalBaaki}`;
-            document.getElementById('customer-pending-count').textContent = customerPendingCount;
-            document.getElementById('customer-overdue-count').textContent = customerOverdueCount;
-        }
-
-        function addNewBaaki() {
-            const name = document.getElementById('customer-name').value;
-            const phone = document.getElementById('customer-phone').value;
-            const item = document.getElementById('item-name').value;
-            const amount = parseInt(document.getElementById('baaki-amount').value);
-            const dueDate = document.getElementById('due-date').value;
-            shopkeeperBaaki.push({
-                id: shopkeeperBaaki.length + 1,
-                name, phone, item, amount,
-                date: new Date().toISOString().split('T')[0],
-                dueDate,
-                status: 'pending'
-            });
-            addBaakiForm.reset();
-            renderShopkeeperBaaki();
-            updateSummary();
-            alert(`Baaki of ₹${amount} added for ${name}`);
-        }
-
-        // Action functions
-        window.sendReminder = function(id) {
-            const baaki = shopkeeperBaaki.find(b => b.id === id);
-            alert(`Reminder sent to ${baaki.name} (${baaki.phone}):\n\n"Namaste, aapki baaki ₹${baaki.amount} hai. Kripya jama kar dein. Dhanyavaad!"`);
-        };
-        window.markAsPaid = function(id) {
-            const baaki = shopkeeperBaaki.find(b => b.id === id);
-            baaki.status = 'paid';
-            renderShopkeeperBaaki();
-            updateSummary();
-            alert(`Marked as paid: ${baaki.name}'s baaki of ₹${baaki.amount}`);
-        };
-        window.payBaaki = function(id) {
-            const baaki = customerBaaki.find(b => b.id === id);
-            alert(`In a real app, this would open UPI payment for ₹${baaki.amount} to ${baaki.shop}`);
-        };
-        window.requestExtension = function(id) {
-            const baaki = customerBaaki.find(b => b.id === id);
-            const newDate = prompt(`Request extension for ${baaki.shop}'s baaki (₹${baaki.amount}). Enter new date (YYYY-MM-DD):`);
-            if (newDate) alert(`Extension requested until ${newDate}. Shopkeeper will be notified.`);
-        };
-
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'short', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('en-IN', options);
-        }
-
-        window.onload = init;
-    </script>
+    <script src="data/shopkeeperData.js"></script>
+    <script src="data/customerData.js"></script>
+    <script src="scripts/helpers.js"></script>
+    <script src="scripts/shopkeeper.js"></script>
+    <script src="scripts/customer.js"></script>
+    <script src="scripts/app.js"></script>
 </body>
 </html>
