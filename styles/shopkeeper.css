@@ -1,0 +1,45 @@
+/* Shopkeeper-specific styles */
+.baaki-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-left: 4px solid var(--primary);
+}
+
+.baaki-card.overdue {
+    border-left-color: #f44336;
+}
+
+.baaki-card h3 {
+    margin: 0 0 5px 0;
+    color: var(--primary);
+}
+
+.baaki-card.overdue h3 {
+    color: #f44336;
+}
+
+.baaki-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.baaki-actions {
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 600px) {
+    .baaki-actions {
+        flex-direction: column;
+    }
+    
+    .baaki-actions button {
+        width: 100%;
+    }
+}
